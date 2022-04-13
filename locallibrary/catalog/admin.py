@@ -9,7 +9,7 @@ admin.site.register(Genre)
 admin.site.register(Language)
 
 
-class BooKInline(admin.TabularInline):
+class BookInline(admin.TabularInline):
     model = Book
     extra = 0
 
@@ -20,7 +20,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
     fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
     
-    inlines = [BooKInline]
+    inlines = [BookInline]
 
 # Register the admin class with the associated model
 admin.site.register(Author, AuthorAdmin)

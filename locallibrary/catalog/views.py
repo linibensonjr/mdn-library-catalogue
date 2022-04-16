@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, request
 from .models import Book, Author, BookInstance, Genre
+from django.views import generic
 
 
 def index(request):
@@ -31,3 +32,18 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+class BookListView(generic.ListView):
+    model = Book
+
+    def get_context_data(self, **kwargs):
+        context = super(BookListView, self).get_context_data(**kwargs)
+        return context
+
+    #context_object_name = 'book_list'   # your own name for the list as a template variable
+    #queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
+
+    def get_queryset(self):
+        return Book.objects.filter(title__icontains='war')[:5]
+
+    template_name = 'catalog/book_list.html'  # Specify your own template name/location

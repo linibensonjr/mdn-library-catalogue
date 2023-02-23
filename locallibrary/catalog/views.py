@@ -47,3 +47,7 @@ class BookListView(generic.ListView):
         return Book.objects.filter(title__icontains='war')[:5]
 
     template_name = 'catalog/book_list.html'  # Specify your own template name/location
+
+
+class BookDetailView(generic.DetailView):
+    pass
